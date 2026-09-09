@@ -35,6 +35,14 @@ export function Navbar() {
             >
               Productos
             </Link>
+            <a
+              href="https://kumespacio.com.ar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-neutral-600 hover:text-black transition-colors"
+            >
+              Sobre Kume
+            </a>
           </nav>
 
           {/* Cart + mobile menu */}
@@ -82,6 +90,15 @@ export function Navbar() {
                   {item.label}
                 </Link>
               ))}
+              <a
+                href="https://kumespacio.com.ar"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-lg px-3 py-2.5 text-sm font-medium text-neutral-700 hover:bg-neutral-100 transition-colors"
+              >
+                Sobre Kume
+              </a>
             </div>
           </nav>
         )}
