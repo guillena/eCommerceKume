@@ -47,3 +47,4 @@ coverage/
 
 # Railway
 .railway/
+apps/api/storage/
