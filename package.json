@@ -1,0 +1,23 @@
+{
+  "name": "ecommerce-kume",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"pnpm --filter api dev\" \"pnpm --filter web dev\"",
+    "build": "pnpm --filter api build && pnpm --filter web build",
+    "start": "concurrently \"pnpm --filter api start\" \"pnpm --filter web start\"",
+    "db:generate": "pnpm --filter api db:generate",
+    "db:migrate": "pnpm --filter api db:migrate",
+    "db:migrate:deploy": "pnpm --filter api db:migrate:deploy",
+    "db:studio": "pnpm --filter api db:studio",
+    "db:seed": "pnpm --filter api db:seed",
+    "lint": "pnpm --filter api lint && pnpm --filter web lint"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}

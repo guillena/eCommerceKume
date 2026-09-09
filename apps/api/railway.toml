@@ -1,0 +1,8 @@
+﻿[build]
+cmd = "pnpm install && pnpm build"
+
+[deploy]
+cmd = "pnpm db:migrate:deploy && node dist/index.js"
+healthcheckPath = "/api/health"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"

@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+@theme {
+  /* Tipografía original */
+  --font-sans: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+
+  /* Fuentes nuevas del mockup */
+  --font-body-sm: "Inter", sans-serif;
+  --font-body-lg: "Inter", sans-serif;
+  --font-display-mobile: "Plus Jakarta Sans", sans-serif;
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-label-md: "Inter", sans-serif;
+  --font-body-md: "Inter", sans-serif;
+  --font-caption: "Inter", sans-serif;
+  --font-headline-lg-mobile: "Plus Jakarta Sans", sans-serif;
+  --font-label-sm: "Inter", sans-serif;
+  --font-headline-md: "Plus Jakarta Sans", sans-serif;
+  --font-headline-sm: "Plus Jakarta Sans", sans-serif;
+  --font-headline-lg: "Plus Jakarta Sans", sans-serif;
+
+  /* Tamaños de fuente nuevos del mockup */
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 20px;
+  --text-body-sm--font-weight: 400;
+  
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 28px;
+  --text-body-lg--font-weight: 400;
+
+  --text-display-mobile: 36px;
+  --text-display-mobile--line-height: 44px;
+  --text-display-mobile--letter-spacing: -0.02em;
+  --text-display-mobile--font-weight: 700;
+
+  --text-display: 48px;
+  --text-display--line-height: 56px;
+  --text-display--letter-spacing: -0.03em;
+  --text-display--font-weight: 700;
+
+  --text-label-md: 14px;
+  --text-label-md--line-height: 20px;
+  --text-label-md--letter-spacing: 0.01em;
+  --text-label-md--font-weight: 500;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 24px;
+  --text-body-md--font-weight: 400;
+
+  --text-caption: 12px;
+  --text-caption--line-height: 16px;
+  --text-caption--font-weight: 400;
+
+  --text-headline-lg-mobile: 26px;
+  --text-headline-lg-mobile--line-height: 34px;
+  --text-headline-lg-mobile--letter-spacing: -0.01em;
+  --text-headline-lg-mobile--font-weight: 600;
+
+  --text-label-sm: 12px;
+  --text-label-sm--line-height: 16px;
+  --text-label-sm--letter-spacing: 0.02em;
+  --text-label-sm--font-weight: 600;
+
+  --text-headline-md: 24px;
+  --text-headline-md--line-height: 32px;
+  --text-headline-md--letter-spacing: -0.015em;
+  --text-headline-md--font-weight: 600;
+
+  --text-headline-sm: 20px;
+  --text-headline-sm--line-height: 28px;
+  --text-headline-sm--letter-spacing: -0.01em;
+  --text-headline-sm--font-weight: 600;
+
+  --text-headline-lg: 32px;
+  --text-headline-lg--line-height: 40px;
+  --text-headline-lg--letter-spacing: -0.02em;
+  --text-headline-lg--font-weight: 700;
+
+
+  /* Colores base originales */
+  --color-primary:            #000000;
+  --color-primary-foreground: #ffffff;
+  --color-background:         #ffffff;
+  --color-foreground:         #0a0a0a;
+  --color-muted:              #f8f8f8;
+  --color-muted-foreground:   #737373;
+  --color-border:             #eeeeee;
+  --color-input:              #eeeeee;
+  --color-ring:               #E3B9FD;   /* Lila pastel — foco en forms */
+  --color-card:               #ffffff;
+  --color-card-foreground:    #0a0a0a;
+  --color-accent:             #B9D3FD;   /* Azul pastel */
+  --color-accent-foreground:  #0a0a0a;
+  --color-destructive:        #ef4444;
+  --color-destructive-foreground: #ffffff;
+
+  /* Pasteles de marca originales */
+  --color-blue-pastel:        #B9D3FD;
+  --color-lila-pastel:        #E3B9FD;
+  --color-mint-pastel:        #B9FDC1;
+  --color-cream-pastel:       #FDE3B9;
+
+  /* Colores nuevos del mockup */
+  --color-on-secondary-container: #415b7f;
+  --color-secondary-fixed-dim: #aec8f1;
+  --color-surface-container: #eeeeee;
+  --color-surface-bright: #f9f9f9;
+  --color-surface-base: #FFFFFF;
+  --color-on-error-container: #93000a;
+  --color-background-new: #f9f9f9;
+  --color-pastel-cream: #FDE3B9;
+  --color-tertiary-fixed-dim: #c8cc72;
+  --color-border-strong: #E5E7EB;
+  --color-on-background: #1b1b1b;
+  --color-inverse-primary: #e1b7fb;
+  --color-surface-subtle: #F9FAFB;
+  --color-on-secondary-fixed: #001c3a;
+  --color-inverse-surface: #303030;
+  --color-primary-container: #e3b9fd;
+  --color-surface-tint: #73508c;
+  --color-surface-container-high: #e8e8e8;
+  --color-on-tertiary-container: #545706;
+  --color-on-primary: #ffffff;
+  --color-tertiary: #5f6213;
+  --color-inverse-on-surface: #f1f1f1;
+  --color-on-surface: #1b1b1b;
+  --color-tertiary-container: #cace74;
+  --color-surface-variant: #e2e2e2;
+  --color-on-primary-fixed: #2c0943;
+  --color-secondary: #466084;
+  --color-on-primary-fixed-variant: #5a3872;
+  --color-secondary-fixed: #d4e3ff;
+  --color-on-secondary-fixed-variant: #2e486b;
+  --color-on-secondary: #ffffff;
+  --color-error: #ba1a1a;
+  --color-surface-dim: #dadada;
+  --color-surface-container-low: #f3f3f3;
+  --color-pastel-mint: #B9FDC1;
+  --color-primary-fixed-dim: #e1b7fb;
+  --color-on-surface-variant: #4b444e;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-fixed: #e4e88b;
+  --color-surface-container-lowest: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-primary-new: #73508c;
+  --color-text-muted: #6B7280;
+  --color-on-primary-container: #684580;
+  --color-on-tertiary-fixed-variant: #474a00;
+  --color-on-error: #ffffff;
+  --color-on-tertiary-fixed: #1c1d00;
+  --color-surface-container-highest: #e2e2e2;
+  --color-primary-fixed: #f3daff;
+  --color-outline: #7d747f;
+  --color-border-subtle: #EEEEEE;
+  --color-secondary-container: #b9d3fd;
+  --color-outline-variant: #cec3cf;
+  --color-surface: #f9f9f9;
+
+  /* Spacing nuevo del mockup */
+  --spacing-space-xs: 0.5rem;
+  --spacing-gutter-desktop: 1.5rem;
+  --spacing-space-sm: 0.75rem;
+  --spacing-space-3xl: 4.5rem;
+  --spacing-gutter-mobile: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xl: 2rem;
+  --spacing-space-2xs: 0.25rem;
+  --spacing-space-4xl: 6rem;
+  --spacing-space-2xl: 3rem;
+  --spacing-container-max: 1320px;
+  --spacing-space-md: 1rem;
+
+  /* Radios */
+  --radius-sm:  0.375rem;
+  --radius-md:  0.5rem;
+  --radius-lg:  0.75rem;
+  --radius-xl:  1rem;
+  --radius-2xl: 1.25rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Focus visible con lila pastel */
+  *:focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+}

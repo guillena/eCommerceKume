@@ -1,0 +1,121 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id            String      @id @default(cuid())
+  slug          String      @unique
+  title         String
+  tagline       String
+  description   String      @db.Text
+  benefits      String[]
+  objectives    String[]
+  price         Float
+  currency      String      @default("ARS")
+  fileUrl       String
+  previewUrl    String?
+  coverImage    String
+  images        String[]
+  fileType      String
+  fileSizeBytes Int         @default(0)
+  pageCount     Int?
+  previewPages  Int         @default(3)
+  isActive      Boolean     @default(true)
+  isFeatured    Boolean     @default(false)
+  
+  // Optional event-like fields
+  duration       String?
+  targetAudience String?
+  attendeeCount  String?
+
+  category      Category    @relation(fields: [categoryId], references: [id])
+  categoryId    String
+  reviews       Review[]
+  orderItems    OrderItem[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@index([slug])
+  @@index([categoryId])
+  @@index([isActive, isFeatured])
+}
+
+model Category {
+  id       String    @id @default(cuid())
+  name     String
+  slug     String    @unique
+  icon     String?
+  products Product[]
+}
+
+model Order {
+  id             String      @id @default(cuid())
+  buyerEmail     String
+  buyerName      String
+  status         OrderStatus @default(PENDING)
+  mpPaymentId    String?     @unique
+  mpPreferenceId String?
+  total          Float
+  currency       String      @default("ARS")
+  items          OrderItem[]
+  downloadToken  String?     @unique
+  tokenExpiresAt DateTime?
+  emailSentAt    DateTime?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  @@index([buyerEmail])
+  @@index([status])
+  @@index([downloadToken])
+}
+
+enum OrderStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+  DELIVERED
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  price     Float
+
+  @@index([orderId])
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  product    Product  @relation(fields: [productId], references: [id])
+  productId  String
+  stars      Int
+  comment    String?  @db.Text
+  authorName String
+  verified   Boolean  @default(false)
+  approved   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+
+  @@index([productId])
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+model ExchangeRateCache {
+  id        String   @id @default("singleton")
+  usdToArs  Float
+  updatedAt DateTime @updatedAt
+}
