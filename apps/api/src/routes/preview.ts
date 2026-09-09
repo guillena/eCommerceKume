@@ -20,6 +20,17 @@ router.get('/:productId', async (req: Request, res: Response) => {
 
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', 'inline');
+    const allowed = [
+      "'self'",
+      'https://libreria.kumespacio.com.ar',
+      'https://www.libreria.kumespacio.com.ar',
+      'http://localhost:3000',
+      'http://localhost:3001',
+    ];
+    if (process.env.FRONTEND_URL) {
+      allowed.push(process.env.FRONTEND_URL.replace(/\/$/, ''));
+    }
+    res.setHeader('Content-Security-Policy', `frame-ancestors ${allowed.join(' ')}`);
     res.sendFile(path.resolve(previewPath));
   } catch (err) {
     console.error('[preview]', err);

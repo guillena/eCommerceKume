@@ -112,7 +112,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
             {product.previewUrl && (
               <div className="max-w-sm mx-auto lg:mx-0 w-full mt-8">
                 <ProductPreview 
-                  previewUrl={`${apiUrl}${product.previewUrl}`} 
+                  previewUrl={product.previewUrl.startsWith('/api/') ? product.previewUrl : `${apiUrl}${product.previewUrl}`}
                   previewPages={product.previewPages} 
                 />
               </div>

@@ -32,21 +32,33 @@ const app = express();
 const PORT = process.env.PORT ?? 3001;
 const frontendUrl = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.replace(/\/$/, '') : null;
 
+const allowedOrigins = [
+  'https://libreria.kumespacio.com.ar',
+  'https://www.libreria.kumespacio.com.ar',
+  'http://localhost:3000',
+  'http://localhost:3001',
+  ...(frontendUrl ? [frontendUrl] : []),
+];
+
 const corsOptions = {
-  origin: [
-    'https://libreria.kumespacio.com.ar',
-    'https://www.libreria.kumespacio.com.ar',
-    'http://localhost:3000',
-    'http://localhost:3001',
-    ...(frontendUrl ? [frontendUrl] : []),
-  ],
+  origin: allowedOrigins,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 // Security
-app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        'frame-ancestors': ["'self'", ...allowedOrigins],
+      },
+    },
+  })
+);
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
 
