@@ -183,7 +183,7 @@ El proyecto incluye `Dockerfile` y `railway.toml` en `apps/api/` para deploy aut
 Variables de entorno en Railway (usar URLs internas):
 
 ```env
-DATABASE_URL=postgresql://postgres:password@postgres.railway.internal:5432/railway
+DATABASE_URL=postgresql://postgres:password@postgres.railway.internal:5432/ecommerce
 NODE_ENV=production
 ```
 
