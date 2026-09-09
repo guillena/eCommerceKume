@@ -1,7 +1,7 @@
 FROM node:20-alpine
 WORKDIR /app
 RUN npm install -g pnpm
-COPY package.json ./
+COPY package.json .npmrc ./
 RUN pnpm install
 COPY . .
 RUN pnpm db:generate
