@@ -2,6 +2,7 @@
   "name": "api",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@9.15.4",
   "scripts": {
     "dev": "nodemon --exec \"ts-node --transpile-only\" src/index.ts",
     "build": "prisma generate && tsc",
