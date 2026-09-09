@@ -30,37 +30,25 @@ ensureStorageDirs();
 
 const app = express();
 const PORT = process.env.PORT ?? 3001;
-const rawFrontendUrl = process.env.FRONTEND_URL ?? 'http://localhost:3000';
-const FRONTEND_URL = rawFrontendUrl.replace(/\/$/, '');
+const frontendUrl = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.replace(/\/$/, '') : null;
 
-const allowedOrigins = [
-  FRONTEND_URL,
-  process.env.SITE_URL?.replace(/\/$/, ''),
-  'https://libreria.kumespacio.com.ar',
-  'https://www.libreria.kumespacio.com.ar',
-  'http://localhost:3000',
-  'http://localhost:3001',
-].filter(Boolean) as string[];
+const corsOptions = {
+  origin: [
+    'https://libreria.kumespacio.com.ar',
+    'https://www.libreria.kumespacio.com.ar',
+    'http://localhost:3000',
+    'http://localhost:3001',
+    ...(frontendUrl ? [frontendUrl] : []),
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
 
 // Security
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      const cleanOrigin = origin.replace(/\/$/, '');
-      if (
-        allowedOrigins.includes(cleanOrigin) ||
-        cleanOrigin.endsWith('.railway.app') ||
-        cleanOrigin.endsWith('.kumespacio.com.ar')
-      ) {
-        return callback(null, true);
-      }
-      return callback(null, false);
-    },
-    credentials: true,
-  }),
-);
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 // General rate limiter
 const generalLimiter = rateLimit({
