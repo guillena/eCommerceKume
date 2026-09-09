@@ -14,7 +14,10 @@ import type {
   CheckoutResponse,
 } from '@/types';
 
-const BASE = `${process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'}/api`;
+const BASE =
+  typeof window !== 'undefined'
+    ? '/api'
+    : `${process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'}/api`;
 
 
 async function request<T>(
