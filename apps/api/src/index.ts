@@ -30,17 +30,34 @@ ensureStorageDirs();
 
 const app = express();
 const PORT = process.env.PORT ?? 3001;
-const FRONTEND_URL = process.env.FRONTEND_URL ?? 'http://localhost:3000';
+const rawFrontendUrl = process.env.FRONTEND_URL ?? 'http://localhost:3000';
+const FRONTEND_URL = rawFrontendUrl.replace(/\/$/, '');
+
+const allowedOrigins = [
+  FRONTEND_URL,
+  process.env.SITE_URL?.replace(/\/$/, ''),
+  'https://libreria.kumespacio.com.ar',
+  'https://www.libreria.kumespacio.com.ar',
+  'http://localhost:3000',
+  'http://localhost:3001',
+].filter(Boolean) as string[];
 
 // Security
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 app.use(
   cors({
-    origin: [
-      FRONTEND_URL,
-      'http://localhost:3000',
-      'http://localhost:3001',
-    ],
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      const cleanOrigin = origin.replace(/\/$/, '');
+      if (
+        allowedOrigins.includes(cleanOrigin) ||
+        cleanOrigin.endsWith('.railway.app') ||
+        cleanOrigin.endsWith('.kumespacio.com.ar')
+      ) {
+        return callback(null, true);
+      }
+      return callback(null, false);
+    },
     credentials: true,
   }),
 );
